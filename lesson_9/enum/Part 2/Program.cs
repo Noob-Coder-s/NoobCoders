@@ -11,43 +11,18 @@ namespace Part_2
             Axe,
             Bow,
         }
-        enum WeaponType2
-        {
-            Sword, //= 0
-            Club, //= 1
-            Axe, //= 2
-            Bow = 50,
-            Hammer, //=51
-            Knives, //=52
-            Staff = 2, //
-            Greatsword = Club, // = 1
-        } //Для примера 10+ и 11+ и 12
-
         public static void Main()
         {
 
             {
 
-                string[] Description = { "острый", "тяжёлый", "угрожающий", "точный" };
-                for (WeaponType i = (int)0; i <= WeaponType.Bow; i++)
+                string[] description = { "острый", "тяжёлый", "угрожающий", "точный" };
+                for (WeaponType i = 0; i <= WeaponType.Bow; i++)
                 {
-                    Console.WriteLine($"{i} - {Description[(int)i]}");
+                    Console.WriteLine($"{i} - {description[(int)i]}");
 
                 }
-                return;
             }//Пример 9+
-
-            {
-                Console.WriteLine((WeaponType2)2);
-
-                string[] Description = { "острый", "тяжёлый", "угрожающий", "точный" };
-                for (WeaponType2 i = (int)0; i <= WeaponType2.Bow; i++)
-                {
-                    Console.WriteLine($"{i} - {Description[(int)i]}");
-
-                }
-                return;
-            }//Пример 10+
 
             {
                 int[] value = (int[])Enum.GetValues(typeof(WeaponType2));
@@ -64,20 +39,31 @@ namespace Part_2
                     Console.WriteLine(i);
                 }
                 Console.WriteLine("^^^Вывод символьных значений^^^");
+
+                WeaponType2 test = WeaponType2.Club;
+                WeaponType2 test2 = (WeaponType2)1;
+                WeaponType2 test3 = (WeaponType2)2;
+                WeaponType2 test4 = (WeaponType2)200;
+                Console.WriteLine(test++);
                 return;
             }//Пример 11+
 
-            {
-                int[] value = (int[])Enum.GetValues(typeof(WeaponType2));
-                string[] names = Enum.GetNames(typeof(WeaponType2));
-                for (int i = 0; i < value.Length; i++)
-                {
-                    Console.WriteLine($"{names[i]} - {value[i]}");
-                }
-                return;
-
-            }// Пример 12
         }
-
+        enum WeaponType2 //Пример 9+
+        {
+            Sword,
+            Club,
+            Axe = 3,
+            Bow, // 4
+            Bow1, // 4
+            Bow2, // 4
+            Bow3 = 70, // 4
+            Bow4, // 4
+            Bow5, // 4
+            Bow6, // 4
+            Bow7 = 3, // 4
+            Bow8 = 3, // 4
+            Bow9 = 5, // 4
+        }
     }
 }

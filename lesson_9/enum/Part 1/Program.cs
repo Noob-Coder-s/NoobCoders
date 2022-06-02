@@ -4,47 +4,6 @@ namespace Part_1
 {
     class Program
     {
-        static double GetPrice(int status)          //Пример 1
-        {
-            switch (status)
-            {
-                case 0: return 80; // не используем break так как, return всё равно не даст уйти дальше.
-                case 1: return 90;
-                case 2: return 60;
-                case 3: return 50;
-                case 4: return 0;
-                case 5: return 70;
-                case 6: return 75;
-                case 7: return 60;
-                case 8: return 75;
-
-
-                default: return 100;
-
-            }
-        }
-
-
-        static double GetPrice(string status)           //Пример 2
-        {
-            switch (status)
-            {
-                case "studentSchool": return 80; // не используем break так как, return всё равно не даст уйти дальше.
-                case "universityStudent": return 90;
-                case "pensioner": return 60;
-                case "veteranLabor": return 50;
-                case "veteranWar": return 0;
-                case "family": return 70;
-                case "firefighter": return 75;
-                case "teacher": return 60;
-                case "doctor": return 75;
-
-                default: return 100;
-
-            }
-        }
-
-
         enum НазваниеПеречисления           // Пример 3
         {
             Значение1, //значения разделяются запятой и именнуются с заглавной буквы
@@ -66,6 +25,7 @@ namespace Part_1
         public static void Main()
         {
             {
+
                 //Mood jackMood = 3; // ошибка
 
                 Mood tomMood = (Mood)3; //явное преобразование
@@ -84,12 +44,6 @@ namespace Part_1
 
                 Console.WriteLine(panMood);
 
-                return;
-
-            } //Пример 4+
-
-
-            {
                 Status Bob;
 
                 while (true)
@@ -101,7 +55,9 @@ namespace Part_1
                     {
                         Bob = (Status)statusInt;
 
-                        Console.WriteLine($"Bob - {Bob} - ticket price: {GetPrice(Bob)}");
+                        double price = GetPrice(Bob);
+
+                        Console.WriteLine($"Bob - {Bob} - ticket price: {price}");
                     }
                 }
             }       //Пример 5++
@@ -109,6 +65,25 @@ namespace Part_1
 
         }
 
+
+        static double GetPrice(string status)
+        {
+            switch (status)
+            {
+                case "studentSchool": return 80; // не используем break так как, return всё равно не даст уйти дальше.
+                case "universityStudent": return 90;
+                case "pensioner": return 60;
+                case "veteranLabor": return 50;
+                case "veteranWar": return 0;
+                case "family": return 70;
+                case "firefighter": return 75;
+                case "teacher": return 60;
+                case "doctor": return 75;
+
+                default: return 100;
+
+            }
+        }
 
         enum Status //Пример 5++
         {
@@ -145,7 +120,6 @@ namespace Part_1
             }
         }
 
-
         enum Rank // Пример 6+ Карты
         {
             Rank_2,
@@ -164,25 +138,18 @@ namespace Part_1
         }
         enum Suit { Clubs, Diamonds, Hearts, Spades, }
 
-
-        enum Move       // Пример 7
+        class CardItem
         {
-            Forward,
-            Backward,
-            Stop,
-            Left,
-            Right,
-            Reverse,
+            public Rank Rank { get; set; }
+            public Suit Suit { get; set; }
         }
 
-        enum Material       //Пример 8
-        {
-            Wood,
-            Steel,
-            Glass,
-            Cloth,
-            Stone,
-        }
+        //CardItem first = new CardItem
+        //{
+        //    Rank = Rank.Queen,
+        //    Suit = Suit.Spades
+        //};
 
+        //Console.WriteLine(first.Suit);
     }
 }

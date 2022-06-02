@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 namespace App
 {
 
@@ -16,12 +17,8 @@ namespace App
 
         static void CopyArray(int[] a, List<int> l)
         {
-            //Засекаем время, чтобы узнать, сколько займет копирование массива
-            DateTime firstTime = DateTime.Now;
             foreach (var x in a)
                 l.Add(x);
-            //Выводим потраченное время
-            Console.WriteLine($"Было потрачено {(DateTime.Now - firstTime).TotalSeconds} секунд на копирование массива");
         }
 
         static void AddRandomElement(ref int[] a)
@@ -41,49 +38,60 @@ namespace App
             var r = new Random();
             var n = r.Next();
             //Засекаем время, чтобы узнать, сколько займет добавление элемента
-            DateTime firstTime = DateTime.Now;
+            var sw = Stopwatch.StartNew();
             l.Add(n);
             //Выводим потраченное время
-            Console.WriteLine($"Было потрачено {(DateTime.Now - firstTime).TotalSeconds} секунд на добавление элемента в список");
+            Console.WriteLine($"Было потрачено {sw.Elapsed} секунд на добавление очередного элемента в список");
         }
 
         public static void Main()
         {
-            //Сравнение массивов
+            //числа можно вводить через подчеркивание. Так они будут лучше читаться 
+            int count = 100_000_000;
+            int[] array = new int[count];
+
+            //создаем массив рандомных чисел
             {
-                int[] a = { 1, 2, 3 };
-                int[] b = { 1, 2, 3 };
-                if (a == b)
-                    Console.WriteLine("Массивы можно сравнивать оператором сравнения");
-                else if (a.Equals(b))
-                    Console.WriteLine("Для сравнения массивов нужно использовать специальный метод, который сравнивает каждый элемент");
-                else
-                    Console.WriteLine("Массивы нельзя сравнивать");
-                return;
+                //Засекаем время, чтобы узнать, сколько займет создание массива
+                var sw = Stopwatch.StartNew();
+                GenerateNumbers(array);
+                //Выводим потраченное время
+                Console.WriteLine($"Было потрачено {sw.Elapsed} секунд на создание массива");
             }
 
             //синтаксис списка
             {
                 //в <> мы указываем тип данных, которые хотим хранить в списке
 
-                //Создадим список с capacity = 0
+                //Создадим список с capacity по умолчанию
                 List<int> l = new List<int>();
+                Console.WriteLine($"Размер списка по умолчанию после создания: {l.Count}");
+                Console.WriteLine($"Емкость списка по умолчанию после создания: {l.Capacity}");
+
                 //Создадим список с capacity = n
                 int n = 10;
                 l = new List<int>(n);
+
                 Console.WriteLine($"Размер списка после создания: {l.Count}");
                 Console.WriteLine($"Емкость списка после создания: {l.Capacity}");
-                //создадим список - копию массива a(скопируются значения элементов массива, а не ссылка на массив)
+
+                //создадим список - копию массива a (скопируются значения элементов массива, а не ссылка на массив)
                 int[] a = new int[] { 1, 2, 3 };
                 l = new List<int>(a);
                 Console.WriteLine($"Размер списка после создания: {l.Count}");
                 Console.WriteLine($"Емкость списка после создания: {l.Capacity}");
+
                 //также можно использовать var
                 var l2 = new List<int>();
 
                 //можно работать точно как с массивом: обращаться по индексу и менять по индексу элементы, использовать foreach и тд
-                l[0] = 666;
-                Console.WriteLine(l[0]);
+                l.Add(3);
+                l.Add(4);
+                l.Add(5);
+                l[0] = 5;
+
+                l.Add(5);
+
                 foreach (var x in l)
                     Console.WriteLine(x);
 
@@ -98,45 +106,49 @@ namespace App
                 Console.WriteLine($"Емкость списка после создания: {l.Capacity}");
             }
 
-            //числа можно вводить через подчеркивание. Так они будут лучше читаться 
-            int count = 100_000_000;
-            int[] Array = new int[count];
-            ///DateTime это такой класс, который хранит в себе дату и время. DateTime.Now возвращает нам текущее время и дату
-            ///Которое мы можем сохранить в переменной. Если мы сохраним время до работы метода и время после работы метода 
-            ///и вычтем одно из другого, то мы получим время, которое было затрачено на работу метода. TotalSeconds превращает эти данные в секунды
-            ///Запускать только в Release сборке
-            //создаем массив рандомных чисел
-            {
-                //Засекаем время, чтобы узнать, сколько займет создание массива
-                DateTime firstTime = DateTime.Now;
-                GenerateNumbers(Array);
-                //Выводим потраченное время
-                Console.WriteLine($"Было потрачено {(DateTime.Now - firstTime).TotalSeconds} секунд на создание массива");
-            }
-            List<int> List = new List<int>(count);
-            Console.WriteLine($"Размер списка после создания: {List.Count}");
-            Console.WriteLine($"Емкость списка после создания: {List.Capacity}");
             //копируем данные массива в лист
-            CopyArray(Array, List);
 
             //Добавляем рандомный элемент в массив
             {
                 //Засекаем время, чтобы узнать, сколько займет добавление элемента
-                DateTime firstTime = DateTime.Now;
-                AddRandomElement(ref Array);
+                var sw = Stopwatch.StartNew();
+                AddRandomElement(ref array);
                 //Выводим потраченное время
-                Console.WriteLine($"Было потрачено {(DateTime.Now - firstTime).TotalSeconds} секунд на добавление элемента в массив");
+                Console.WriteLine($"Было потрачено {sw.Elapsed} секунд на добавление элемента в массив с копированием массива n+1");
+            }
+
+            // хотим добавить новый элемент
+            List<int> list = new List<int>(array.Length + 1);
+
+            {
+                //Засекаем время, чтобы узнать, сколько займет копирование массива
+                var sw = Stopwatch.StartNew();
+
+                Console.WriteLine($"Размер нашего списка после создания: {list.Count}");
+                Console.WriteLine($"Емкость нашего списка после создания: {list.Capacity}");
+
+                CopyArray(array, list);
+                //Выводим потраченное время
+                Console.WriteLine($"Было потрачено {sw.Elapsed} секунд на копирование массива в лист");
             }
 
             //Добавляем элемент в список c таймером
-            AddRandomElement(List);
-            AddRandomElement(List); //1E-06 = 1 * 10^-6 = 0.000001
+            AddRandomElement(list);
+            AddRandomElement(list);
+            AddRandomElement(list); //1E-06 = 1 * 10^-6 = 0.000001
 
-            //что будет если не выделить сразу подходящий объем памяти
-            List<int> List2 = new List<int>();
-            CopyArray(Array, List2);
+            {
+                //что будет если не выделить сразу подходящий объем памяти
+                List<int> List2 = new List<int>();
+                var sw = Stopwatch.StartNew();
+                CopyArray(array, List2);
+                Console.WriteLine($"Было потрачено {sw.Elapsed} секунд на копирование массива в лист");
+            }
             //Попробуйте с помощью дебагера посмотреть на то, как будут изменяться свойства count и capacity(находится в Raw View)
             //и постарайтесь сделать вывод, почему лучше изначально выделять необходимое количество памяти
+
+            var somelist = new List<int>(10);
+            somelist[0] = 3; // ошибка: по такому индексу элемент ещё не был добавлен
         }
     }
 }
