@@ -57,7 +57,7 @@ namespace Part1
             switch (status)
             {
                 case "studentSchool": return 80;
-                // не используем break так как, return всё равно не даст уйти дальше.
+                    // не используем break так как, return всё равно не даст уйти дальше.
                 case "universityStudent": return 90;
                 case "pensioner": return 60;
                 case "veteranLabor": return 50;
@@ -80,7 +80,8 @@ namespace Part1
                 Console.WriteLine("Укажите свой статус");
                 var userInput = Console.ReadLine();
 
-                if (Enum.TryParse<Status>(userInput, out var status))
+                var isValidStatus = Enum.TryParse(userInput, true, out Status status);
+                if (isValidStatus)
                 {
                     var price = GetPrice(status);
 
