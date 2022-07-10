@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32228.343
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D92A4E66-C24A-4C32-B284-FEF70ED5578C}"
 	ProjectSection(SolutionItems) = preProject
 		Сценарий.txt = Сценарий.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part 1", "Part 1\Part 1.csproj", "{D574F4A2-B5A4-4595-B782-5D964A7DC865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1", "Part 1\Part1.csproj", "{D574F4A2-B5A4-4595-B782-5D964A7DC865}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part 2", "Part 2\Part 2.csproj", "{B17B5042-4990-40F9-8F47-49523B03E7BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part2", "Part 2\Part2.csproj", "{B17B5042-4990-40F9-8F47-49523B03E7BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

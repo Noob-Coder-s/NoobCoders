@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Part_2</RootNamespace>
+    <TargetFramework>net6</TargetFramework>
+    <RootNamespace>Part_1</RootNamespace>
   </PropertyGroup>
 
 </Project>

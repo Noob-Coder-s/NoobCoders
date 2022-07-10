@@ -1,19 +1,20 @@
 ﻿using System;
 
-namespace Part_1
+namespace Part1
 {
     class Program
     {
-        enum НазваниеПеречисления           // Пример 3
+        enum НазваниеПеречисления
         {
-            Значение1, //значения разделяются запятой и именнуются с заглавной буквы
+            //значения разделяются запятой и именнуются с заглавной буквы
+            Значение1,
             Значение2,
-            Значение3 //их может быть сколько угодно
+            //их может быть сколько угодно
+            Значение3
         }
         enum НазваниеПеречисления2 { значение1, значение2, значение3 } // Вариант записи
 
-
-        enum Mood       //Пример 4+
+        enum Mood
         {
             Joy,        // = 0
             Sadness,    // = 1
@@ -24,53 +25,39 @@ namespace Part_1
 
         public static void Main()
         {
-            {
+            var joy = Mood.Joy;
+            Console.WriteLine(joy.ToString());
 
-                //Mood jackMood = 3; // ошибка
+            //Mood jackMood = 3; // ошибка
 
-                Mood tomMood = (Mood)3; //явное преобразование
+            var tomMood = (Mood)3; //явное преобразование
 
-                //Mood annaMood = Fear; 
+            //Mood annaMood = Fear; 
 
-                Mood khanMood = Mood.Sadness; // = 1
+            var khanMood = Mood.Sadness; // = 1
 
-                Mood panMood = tomMood; // = Boredom
+            var panMood = tomMood; // = Boredom
 
-                panMood = Mood.Fear;    //Перечисления значимый тип данных, после этого значение tomMood не измениться
+            Console.WriteLine($"panMood {panMood}, tomMood {tomMood}");
 
-                Console.WriteLine(tomMood);
+            //Перечисления значимый тип данных, после этого значение tomMood не измениться
+            panMood = Mood.Fear;
 
-                Console.WriteLine((int)khanMood);
+            Console.WriteLine(tomMood);
 
-                Console.WriteLine(panMood);
+            Console.WriteLine((int)khanMood);
 
-                Status Bob;
+            Console.WriteLine($"panMood {panMood}, tomMood {tomMood}");
 
-                while (true)
-                {
-                    Console.WriteLine("Ты кто такой? ");
-                    int statusInt = int.Parse(Console.ReadLine());
-
-                    if (0 <= statusInt && statusInt < (int)Status.Last)
-                    {
-                        Bob = (Status)statusInt;
-
-                        double price = GetPrice(Bob);
-
-                        Console.WriteLine($"Bob - {Bob} - ticket price: {price}");
-                    }
-                }
-            }       //Пример 5++
-
-
+            CheckStatuses();
         }
-
 
         static double GetPrice(string status)
         {
             switch (status)
             {
-                case "studentSchool": return 80; // не используем break так как, return всё равно не даст уйти дальше.
+                case "studentSchool": return 80;
+                    // не используем break так как, return всё равно не даст уйти дальше.
                 case "universityStudent": return 90;
                 case "pensioner": return 60;
                 case "veteranLabor": return 50;
@@ -79,13 +66,35 @@ namespace Part_1
                 case "firefighter": return 75;
                 case "teacher": return 60;
                 case "doctor": return 75;
-
                 default: return 100;
-
             }
         }
 
-        enum Status //Пример 5++
+        private static void CheckStatuses()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+
+            while (true)
+            {
+                Console.WriteLine("Укажите свой статус");
+                var userInput = Console.ReadLine();
+
+                var isValidStatus = Enum.TryParse(userInput, true, out Status status);
+                if (isValidStatus)
+                {
+                    var price = GetPrice(status);
+
+                    Console.WriteLine($"Статус {status} - цена билета: {price}");
+                }
+                else
+                {
+                    Console.WriteLine("Неверный статус");
+                }
+            }
+        }
+
+        enum Status
         {
             StudentSchool,
             UniversityStud,
@@ -98,13 +107,11 @@ namespace Part_1
             Doctor,
             Plumber,
             Militia,
-            Programmer, // Новые значения добавляем перед Last
-            Last, // используется как последний элемент
+            Programmer
         }
 
-        static double GetPrice(Status sts)          //пример 5++
-        {   //Как и обычно, указываем тип переменной -- имя перечисления
-
+        static double GetPrice(Status sts)
+        {
             switch (sts)
             {
                 case Status.StudentSchool: return 80;
@@ -120,7 +127,8 @@ namespace Part_1
             }
         }
 
-        enum Rank // Пример 6+ Карты
+        // Игральные карты - достоинство и масть
+        enum Rank
         {
             Rank_2,
             Rank_3,
@@ -144,12 +152,15 @@ namespace Part_1
             public Suit Suit { get; set; }
         }
 
-        //CardItem first = new CardItem
-        //{
-        //    Rank = Rank.Queen,
-        //    Suit = Suit.Spades
-        //};
+        public void SampleCardUsage()
+        {
+            var firstCard = new CardItem
+            {
+                Rank = Rank.Queen,
+                Suit = Suit.Spades
+            };
 
-        //Console.WriteLine(first.Suit);
+            Console.WriteLine($"Карта имеет достоинство {firstCard.Rank} и масть {firstCard.Suit}");
+        }
     }
 }
