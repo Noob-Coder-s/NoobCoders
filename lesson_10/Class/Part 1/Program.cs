@@ -32,36 +32,6 @@ namespace Part_1
         public double consumption;
         public double volumeTank;
         public double fuelSupply;
-
-        //снипет ctor
-        //конструктор по умолчанию
-        /// Пример кода 7
-        public Car()
-        {
-            producer = "Kia";
-            fullName = "Kia Rio";
-            color = Color.Белый;
-            power = 123;
-            consumption = 6.4;
-            volumeTank = 50;
-            fuelSupply = volumeTank;
-        }
-
-        /// Пример кода 8
-        public Car (string p, string fN, Color color, int power, double consumption, double volumeTank)
-        {
-            //Вариант 1
-            producer = p;
-            fullName = fN;
-            //Вариант 2
-            this.color = color;
-            this.power = power;
-            this.consumption = consumption;
-            this.volumeTank = volumeTank;
-            this.fuelSupply = volumeTank; //а здесь ничего и не требовалось, но стоит писать все в одном стиле
-        }
-
-
     }
 
     class Program
@@ -111,13 +81,6 @@ namespace Part_1
 
             ChangeCarColor(c, Color.Красный);
             PrintCarInfo(c);
-
-            //дальше автору кода было лень гуглить настоящие машины, так что учитесь абстрагироваться
-            ///Пример кода 9
-            c2 = new Car("Skoda", "Skoda Rapid", Color.Черный, 350, 10.3, 60);
-            c3 = new Car("Tesla", "Tesla Model S", Color.Белый, 400, 1.3, 25); //это электрокар, у него топливо не в литрах измеряется, подумайте как решить эту проблему
-            PrintCarInfo(c2);
-            PrintCarInfo(c3);
         }
     }
 }
