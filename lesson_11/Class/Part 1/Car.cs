@@ -7,7 +7,7 @@
     public double Consumption;
     public double VolumeTank;
     public double FuelSupply;
-    public string[] PassengersNames;
+    public List<string> PassengersNames;
 
     public void PrintSelf()
     {

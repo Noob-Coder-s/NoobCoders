@@ -48,12 +48,12 @@
             car.PrintSelf();
         }
 
-
         var barCar = new Car();
         barCar.VolumeTank = 100;
         barCar.Color = Color.Red;
         barCar.Power = 10;
 
+        // синтаксис инициализации полей класса
         var fooCar = new Car
         {
             VolumeTank = 100,
@@ -67,12 +67,14 @@
         var carCreatedWithFactoryMethod = CreateCar("Lightning McQueen");
         PrintCarInfo(carCreatedWithFactoryMethod);
 
+        // пример с игроками и картами
         var player1 = new Player
         {
             Name = "John",
             Balance = 100,
             Cards = new List<Card>()
             {
+                // инициализаторы могут быть вложенными
                 new Card
                 {
                     Rank = Rank.Two,
@@ -87,12 +89,12 @@
         };
         var player2 = new Player
         {
-            Name = "f",
+            Name = "Mary",
         };
 
         player1.Cards.Add(new Card { Suit = Suit.Spades, Rank = Rank.Three });
 
-        var r = player1.Cards[0].Rank;
+        var rank = player1.Cards[0].Rank;
 
         var allPlayers = new List<Player>
         {
@@ -107,7 +109,7 @@
         var car = new Car
         {
             FullName = name,
-            PassengersNames = new string[4]
+            PassengersNames = new List<string>(),
         };
 
         return car;
@@ -129,6 +131,7 @@
     {
         c.Color = color;
     }
+
 
     // номинал
     enum Rank { Two, Three, Queen }

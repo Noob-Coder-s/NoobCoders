@@ -1,0 +1,19 @@
+﻿// псевдокод для демонстрации потребности в своём составном типе,
+// который будет содержать набор нужных полей
+
+var excelFile = OpenExcelFile();
+
+var result = new List<?>();
+
+foreach (var row in excelFile)
+{
+  var carName = row[0];
+  var carPrice = row[1];
+  var consumption = row[2];
+  var color = row[3];
+
+  var item = ...;
+  result.Add(item);
+}
+
+ProcessItems(result);
